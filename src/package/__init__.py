@@ -5,8 +5,10 @@ __version__ = "0.0.1"
 from textual.app import App, ComposeResult
 from textual.widgets import Static, Header, Footer, Input
 
+from typing import Any
 
-class PrincetonApp(App):
+
+class PrincetonApp(App[Any]):
     """Displays the Princeton colors."""
 
     BINDINGS = [("q", "quit", "Quit")]
@@ -22,7 +24,7 @@ class PrincetonApp(App):
         yield Footer()
 
 
-def main():
+def main() -> None:
     PrincetonApp().run()
 
 

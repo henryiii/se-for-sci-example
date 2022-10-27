@@ -12,3 +12,7 @@ dependencies = [
 
 [project.scripts]
 princeton = "package:main"
+
+
+[tool.mypy]
+strict = true
