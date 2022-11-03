@@ -21,7 +21,7 @@ jobs:
           python-version: "3.x"
       - uses: pre-commit/action@v3.0.0
 
-    
+
   tests:
     needs: [lint]
     name: Test ${{ matrix.runs-on }}
@@ -34,12 +34,12 @@ jobs:
           - windows-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11"
-          
+
       - name: Install package and test requirements
         run: python -m pip install .[test]
-      
+
       - run: python -m pytest
