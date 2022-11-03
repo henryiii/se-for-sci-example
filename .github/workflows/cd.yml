@@ -7,7 +7,7 @@ on:
       - publish
 
 jobs:
-  build:
+  dist:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,4 +16,21 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
+          name: artifact
           path: dist/*
+          
+  publish:
+    needs: [dist]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'published'
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: artifact
+          path: dist
+
+      - uses: pypa/gh-action-pypi-publish@v1.5.1
+        with:
+          repository_url: https://test.pypi.org/legacy/
+          password: ${{ secrets.pypi_password }}
